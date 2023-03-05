@@ -1,0 +1,179 @@
+{% extends 'base.html' %}
+{% block style %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}" />
+{% endblock %}
+{% block title %}
+    Strona Główna
+{% endblock %}
+{% block content %}
+    <p></p>
+    
+    <a href="{{ url_for('grupa_page', gr='A') }}"><img src="{{url_for('static', filename='images/a.png')}}" alt="A" style="width: 10%; position: absolute; margin-left: 10%; padding-top: 2em;"></a>
+    <a href="{{ url_for('pilkarz_page', id_p=1308) }}"><img src="{{url_for('static', filename='images/gakpo.png')}}" alt="Gakpo" style="width: 9%; position: absolute; margin-left: 70%; padding-top: 1em;"></a>
+    <table class="table table-hover" style="background-color: #edeee4; width: 40%; margin-left: 25%;">
+        <thead>
+            <tr style="background-color: #edeee4;">
+                <th scope="col">Grupa A</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in a %}
+                <tr>
+                    <td>{{ item.nazwa }}</td>
+                    <td>
+                        <a class="btn btn-outline" style="color: white;background-color: #761b34;" href="{{ url_for('reprezentacja_page', id_r=item.id_reprezentacja) }}" role="button">Więcej</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p></p>
+
+    <a href="{{ url_for('grupa_page', gr='B') }}"><img src="{{url_for('static', filename='images/b.png')}}" alt="B" style="width: 10%; position: absolute; margin-left: 10%; padding-top: 2em;"></a>
+    <a href="{{ url_for('pilkarz_page', id_p=109) }}"><img src="{{url_for('static', filename='images/kane.png')}}" alt="Kane" style="width: 5%; position: absolute; margin-left: 71.25%; padding-top: 0em;"></a>
+    <table class="table table-hover" style="background-color: #edeee4; width: 40%; margin-left: 25%;">
+        <thead>
+            <tr style="background-color: #edeee4;">
+                <th scope="col">Grupa B</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in b %}
+                <tr>
+                    <td>{{ item.nazwa }}</td>
+                    <td>
+		                <a class="btn btn-outline" style="color: white;background-color: #761b34;" href="{{ url_for('reprezentacja_page', id_r=item.id_reprezentacja) }}" role="button">Więcej</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p></p>
+
+    <a href="{{ url_for('grupa_page', gr='C') }}"><img src="{{url_for('static', filename='images/c.png')}}" alt="C" style="width: 10%; position: absolute; margin-left: 10%; padding-top: 2em;"></a>
+    <a href="{{ url_for('pilkarz_page', id_p=310) }}"><img src="{{url_for('static', filename='images/messi.png')}}" alt="Messi" style="width: 12%; position: absolute; margin-left: 71%; padding-top: 0em;"></a>
+    <table class="table table-hover" style="background-color: #edeee4; width: 40%; margin-left: 25%;">
+        <thead>
+            <tr style="background-color: #edeee4;">
+                <th scope="col">Grupa C</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in c %}
+                <tr>
+                    <td>{{ item.nazwa }}</td>
+                    <td>
+                        <a class="btn btn-outline" style="color: white;background-color: #761b34;" href="{{ url_for('reprezentacja_page', id_r=item.id_reprezentacja) }}" role="button">Więcej</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p></p>
+
+    <a href="{{ url_for('grupa_page', gr='D') }}"><img src="{{url_for('static', filename='images/d.png')}}" alt="D" style="width: 10%; position: absolute; margin-left: 10%; padding-top: 2em;"></a>
+    <a href="{{ url_for('pilkarz_page', id_p=1010) }}"><img src="{{url_for('static', filename='images/mbappe.png')}}" alt="Mbappe" style="width: 14%; position: absolute; margin-left: 70%; padding-top: 1em;"></a>
+    <table class="table table-hover" style="background-color: #edeee4; width: 40%; margin-left: 25%;">
+        <thead>
+            <tr style="background-color: #edeee4;">
+                <th scope="col">Grupa D</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in d %}
+                <tr>
+                    <td>{{ item.nazwa }}</td>
+                    <td>
+                        <a class="btn btn-outline" style="color: white;background-color: #761b34;" href="{{ url_for('reprezentacja_page', id_r=item.id_reprezentacja) }}" role="button">Więcej</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p></p>
+
+    <a href="{{ url_for('grupa_page', gr='E') }}"><img src="{{url_for('static', filename='images/e.png')}}" alt="E" style="width: 10%; position: absolute; margin-left: 10%; padding-top: 2em;"></a>
+    <a href="{{ url_for('pilkarz_page', id_p=2301) }}"><img src="{{url_for('static', filename='images/neuer.png')}}" alt="Neuer" style="width: 9%; position: absolute; margin-left: 70%; padding-top: 0em;"></a>
+    <table class="table table-hover" style="background-color: #edeee4; width: 40%; margin-left: 25%;">
+        <thead>
+            <tr style="background-color: #edeee4;">
+                <th scope="col">Grupa E</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in e %}
+                <tr>
+                    <td>{{ item.nazwa }}</td>
+                    <td>
+                        <a class="btn btn-outline" style="color: white;background-color: #761b34;" href="{{ url_for('reprezentacja_page', id_r=item.id_reprezentacja) }}" role="button">Więcej</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p></p>
+
+    <a href="{{ url_for('grupa_page', gr='F') }}"><img src="{{url_for('static', filename='images/f.png')}}" alt="F" style="width: 10%; position: absolute; margin-left: 10%; padding-top: 2em;"></a>
+    <a href="{{ url_for('pilkarz_page', id_p=710) }}"><img src="{{url_for('static', filename='images/modric.png')}}" alt="Modric" style="width: 10.5%; position: absolute; margin-left: 70%; padding-top: 0em;"></a>
+    <table class="table table-hover" style="background-color: #edeee4; width: 40%; margin-left: 25%;">
+        <thead>
+            <tr style="background-color: #edeee4;">
+                <th scope="col">Grupa F</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in f %}
+                <tr>
+                    <td>{{ item.nazwa }}</td>
+                    <td>
+                        <a class="btn btn-outline" style="color: white;background-color: #761b34;" href="{{ url_for('reprezentacja_page', id_r=item.id_reprezentacja) }}" role="button">Więcej</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p></p>
+
+    <a href="{{ url_for('grupa_page', gr='G') }}"><img src="{{url_for('static', filename='images/g.png')}}" alt="G" style="width: 10%; position: absolute; margin-left: 10%; padding-top: 2em;"></a>
+    <a href="{{ url_for('pilkarz_page', id_p=610) }}"><img src="{{url_for('static', filename='images/ney.png')}}" alt="Neymar" style="width: 14%; position: absolute; margin-left: 70%; padding-top: -1em;"></a>
+    <table class="table table-hover" style="background-color: #edeee4; width: 40%; margin-left: 25%;">
+        <thead>
+            <tr style="background-color: #edeee4;">
+                <th scope="col">grupa G</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in g %}
+                <tr>
+                    <td>{{ item.nazwa }}</td>
+                    <td>
+                        <a class="btn btn-outline" style="color: white;background-color: #761b34;" href="{{ url_for('reprezentacja_page', id_r=item.id_reprezentacja) }}" role="button">Więcej</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p></p>
+
+    <a href="{{ url_for('grupa_page', gr='H') }}"><img src="{{url_for('static', filename='images/h.png')}}" alt="H" style="width: 10%; position: absolute; margin-left: 10%; padding-top: 2em;"></a>
+    <a href="{{ url_for('pilkarz_page', id_p=2507) }}"><img src="{{url_for('static', filename='images/cr7.png')}}" alt="Ronaldo" style="width: 9.5%; position: absolute; margin-left: 70%; padding-top: -1em;"></a>
+    <table class="table table-hover" style="background-color: #edeee4; width: 40%; margin-left: 25%;">
+        <thead>
+            <tr style="background-color: #edeee4;">
+                <th scope="col">Grupa H</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in h %}
+                <tr>
+                    <td>{{ item.nazwa }}</td>
+                    <td>
+                        <a class="btn btn-outline" style="color: white;background-color: #761b34;" href="{{ url_for('reprezentacja_page', id_r=item.id_reprezentacja) }}" role="button">Więcej</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+{% block actions %}
+{% endblock %}

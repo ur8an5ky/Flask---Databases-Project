@@ -1,0 +1,109 @@
+{% extends 'base.html' %}
+{% block style %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}" />
+{% endblock %}
+{% block title %}
+    Mecz {{ mecz_id }}
+{% endblock %}
+{% block content %}
+    <p></p>
+    {% for item in items %}
+    <table class="table table-hover" style="width: 55%; background-color: #edeee4; text-align: left; margin-left: 15%; position: absolute;">
+        <thead>
+            <tr style="background-color: #edeee4;">
+                <th scope="col">ID meczu</th>
+                <th scope="col" style="text-align: center;">Drużyna</th>
+                <th scope="col" style="text-align: center;">Wynik</th>
+                <!-- {% if current_user.is_authenticated %}
+                    <th></th>        
+                    <th></th>
+                {% endif %}  -->
+                <th scope="col" style="text-align: center;">Drużyna</th>
+                <!-- <th scope="col">Faza</th>   grupa!! -->
+                <!-- <th scope="col">id_sedzia</th>
+                <th scope="col">id_stadion</th>
+            OBA WYZEJ DO SEKCJI WIECEJ
+            -->
+                <th scope="col">Rozpoczęcie</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <td>{{ item.id_mecz }}</td>
+                    <td style="text-align: center;"><a href="{{ url_for('reprezentacja_page', id_r=item.id_reprezentacja1) }}" class="link-dark">{{ item.nazwa1 }}</a></td>            
+                    <td style="text-align: center;">{{ item.wynik1 }} : {{ item.wynik2 }}</td>
+                    <td style="text-align: center;"><a href="{{ url_for('reprezentacja_page', id_r=item.id_reprezentacja2) }}" class="link-dark">{{ item.nazwa2 }}</a></td> 
+                    <td>{{ item.data_rozpoczecia }}</td>
+
+                </tr>
+        </tbody>
+    </table>
+
+    <table class="table table-hover" style="width: 10%; background-color: #edeee4; text-align: left; margin-left: 75%; position: absolute;">
+        <thead>
+            <tr style="background-color: #edeee4;">
+                <th scope="col" style="text-align: center;">Sedzia</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <td style="text-align: center;"><a href="{{ url_for('sedzia_page', id_s=item.id_sedzia) }}" class="link-dark">{{ item.imie }} {{ item.nazwisko }}</a></td>
+                </tr>
+        </tbody>
+    </table>
+
+    {% for stadion in stadion %}
+        <table class="table table-hover" style="width: 10%; background-color: #edeee4; text-align: left; margin-left: 75%;  margin-top: 8%; position: absolute;">
+            <thead>
+                <tr style="background-color: #edeee4;">
+                    <th scope="col" style="text-align: center;">Stadion</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td style="text-align: center;"><a href="{{ url_for('stadion_page', id_st=stadion.id_stadion) }}" class="link-dark">{{ stadion.nazwa }}<br>{{ stadion.miasto }}</a></td>
+                    </tr>
+            </tbody>
+        </table>
+    {% endfor %}
+
+    <table class="table table-hover" style="width: 25%; background-color: #edeee4; text-align: left; margin-left: 15%; margin-top: 8%; position:absolute;">
+        <thead>
+            <tr style="background-color: #edeee4;">
+                <th scope="col" style="text-align: center;">Zawodnik</th>
+                <th scope="col" style="text-align: right;">Liczba bramek</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in strz_r1 %}
+                <tr>
+                    <td style="text-align: center;"><a href="{{ url_for('pilkarz_page', id_p=item.id_pilkarz) }}" class="link-dark">{{ item.numer }}. {{ item.imie[0] }}. {{ item.nazwisko }}</a></td>
+                    <td style="text-align: right;">{{ item.liczba_goli }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    <table class="table table-hover" style="width: 25%; background-color: #edeee4; text-align: left; margin-left: 45%; margin-top: 8%; position:absolute;">
+        <thead>
+            <tr style="background-color: #edeee4;">
+                <th scope="col" style="text-align: center;">Zawodnik</th>
+                <th scope="col" style="text-align: right;">Liczba bramek</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in strz_r2 %}
+                <tr>
+                    <td style="text-align: center;"><a href="{{ url_for('pilkarz_page', id_p=item.id_pilkarz) }}" class="link-dark">{{ item.numer }}. {{ item.imie[0] }}. {{ item.nazwisko }}</a></td>
+                    <td style="text-align: right;">{{ item.liczba_goli }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    {% endfor %}
+
+{% endblock %}
+{% block actions %}
+{% endblock %}

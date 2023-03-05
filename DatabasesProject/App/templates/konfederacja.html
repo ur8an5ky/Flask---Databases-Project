@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block style %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}" />
+{% endblock %}
+{% block title %}
+    Konfederacja
+{% endblock %}
+{% block content %}
+    {% for item in items %}
+        <p></p>
+        <table class="table table-hover" style="background-color: #edeee4; width: 70%; margin-left: 15%;">
+            <thead>
+                <tr style="background-color: #edeee4;">
+                    <th scope="col">ID</th>
+                    <th scope="col">Nazwa</th>
+                    <th scope="col">Kontynent</th>
+                </tr>
+            </thead>
+            <tbody>
+                    <tr>
+                        <td>{{ item.id_federacja }}</td>
+                        <td>{{ item.nazwa }}</td>
+                        <td>{{ item.kontynent }}</td>
+                    </tr>
+            </tbody>
+        </table>
+
+        <table class="table table-hover" style="width: 30%; background-color: #edeee4; text-align: left; margin-left: 15%; margin-top: 8%; position:absolute;">
+            <thead>
+                <tr style="background-color: #edeee4;">
+                    <th scope="col" style="text-align: center;">Reprezentacja</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in druzyny %}
+                    <tr>
+                        <td style="text-align: center;"><a href="{{ url_for('reprezentacja_page', id_r=item.id_reprezentacja) }}" class="link-dark">{{ item.nazwa }}</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+
+
+        <table class="table table-hover" style="width: 30%; background-color: #edeee4; text-align: left; margin-left: 55%; margin-top: 8%; position:absolute;">
+            <thead>
+                <tr style="background-color: #edeee4;">
+                    <th scope="col" style="text-align: center;">Sedzia</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for item in sedziowie %}
+                    <tr>
+                        <td style="text-align: center;"><a href="{{ url_for('sedzia_page', id_s=item.id_sedzia) }}" class="link-dark">{{ item.imie }} {{ item.nazwisko }}</a></td>
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endfor %}
+{% endblock %}
+{% block actions %}
+{% endblock %}

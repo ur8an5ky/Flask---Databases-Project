@@ -1,0 +1,68 @@
+{% extends 'base.html' %}
+{% block style %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}" />
+{% endblock %}
+{% block title %}
+    {% if not selekcjoner %}
+        Pilkarz
+    {% else %}
+        Selekcjoner
+    {% endif %}
+{% endblock %}
+{% block content %}
+    <p></p>
+
+    <table class="table table-hover" style="background-color: #edeee4; width: 60%; margin-left: 20%;">
+        <thead>
+            <tr style="background-color: #edeee4;">
+                {% if not selekcjoner %}
+                    <th scope="col">Numer</th>
+                {% endif %}
+                <th scope="col">Imie</th>
+                <th scope="col">Nazwisko</th>
+                <th scope="col">Reprezentacja</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in pilkarz %}
+                <tr>
+                    {% if not selekcjoner %}
+                        <td>{{ item.numer }}</td>
+                    {% endif %}
+                    <td>{{ item.imie }}</td>
+                    <td>{{ item.nazwisko }}</td>
+                    <td style="text-align: center;"><a href="{{ url_for('reprezentacja_page', id_r=item.id_reprezentacja) }}" class="link-dark">{{ item.reprezentacja }}</a></td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+
+    <p></p>
+
+    <table class="table table-hover" style="background-color: #edeee4; width: 60%; margin-left: 20%; margin-top: 4%;">
+        <thead>
+            <tr style="background-color: #edeee4;">
+                <th scope="col">ID meczu</th>
+                <th scope="col">Drużyna</th>
+                <th scope="col">Wynik</th>
+                <th scope="col">Drużyna</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in mecze %}
+                <tr>
+                    <td>{{ item.id_mecz }}</td>
+                    <td>{{ item.nazwa1 }}</td>
+                    <td>{{ item.wynik1 }} : {{ item.wynik2 }}</td>
+                    <td>{{ item.nazwa2 }}</td>
+                    <td>
+                        <a class="btn btn-outline" style="color: white;background-color: #761b34;" href="{{ url_for('mecz_page', id_m=item.id_mecz, id_r1=item.id_reprezentacja1, id_r2=item.id_reprezentacja2) }}" role="button">Więcej</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+{% block actions %}
+{% endblock %}

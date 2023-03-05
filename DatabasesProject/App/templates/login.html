@@ -1,0 +1,27 @@
+{% extends 'base.html' %}
+{% block style %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/log_reg.css')}}" />
+{% endblock %}
+{% block title %}
+    Logging Page
+{% endblock %}
+{% block content %}
+    <p></p>
+    <div class="container">
+        <form method="POST" class="form-signin" style="color: #edeee4; font-weight: bold;" novalidate>
+            {{ form.hidden_tag() }}
+            <h1 class="h3 mb-3 font-weight-normal" style="color: white;">
+                Please Log in
+            </h1>
+            <br>
+            {{ form.username.label() }}:<p></p>
+            {{ form.username(class="form-control", placeholder="Username", style="text-align: center;") }}<p></p>
+            {{ form.password.label() }}:<p></p>
+            {{ form.password(class="form-control", placeholder="Password", style="text-align: center;") }}<p></p>
+            <br>
+            {{ form.submit(class="btn btn-lg btn-block btn-primary") }}
+        </form>
+    </div>
+{% endblock %}
+{% block actions %}
+{% endblock %}

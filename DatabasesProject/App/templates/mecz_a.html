@@ -1,0 +1,121 @@
+{% extends 'base.html' %}
+{% block style %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}" />
+{% endblock %}
+{% block title %}
+    Mecz {{ mecz_id }}
+{% endblock %}
+{% block content %}
+    <p></p>
+    {% for item in items %}
+    <table class="table table-hover" style="width: 60%; background-color: #edeee4; text-align: left; margin-left: 20%; position: absolute;">
+        <thead>
+            <tr style="background-color: #edeee4;">
+                <th scope="col">ID meczu</th>
+                <th scope="col" style="text-align: center;">Drużyna</th>
+                {% if current_user.is_authenticated %}
+                    <th scope="col" style="text-align: center;">Wynik</th>
+                {% endif %} 
+                <th scope="col" style="text-align: center;">Drużyna</th>
+                <!-- <th scope="col">Faza</th>   grupa!! -->
+                <!-- <th scope="col">id_sedzia</th>
+                <th scope="col">id_stadion</th>
+            OBA WYZEJ DO SEKCJI WIECEJ
+            -->
+                <th scope="col">Rozpoczęcie</th>
+            </tr>
+        </thead>
+        <tbody>
+                <tr>
+                    <td>{{ item.id_mecz }}</td>
+                    <td style="text-align: center;"><a href="{{ url_for('reprezentacja_page', id_r=item.id_reprezentacja1) }}" class="link-dark">{{ item.nazwa1 }}</a></td>            
+                    {% if current_user.is_authenticated %}
+                        <td>
+
+                            <form action="{{ url_for('mecz_admin_page', id_m=mecz_id, id_r1=item.id_reprezentacja1, w_r1 = item.wynik1, id_r2=item.id_reprezentacja2, w_r2 = item.wynik2) }}" method="POST" style="text-align: center;">
+                                <div class="input-group" >
+                                    <input min="0" max="9" value="{{ item.wynik1 }}" type="number" id="wynik1" name="wynik1" class="form-control" style="height: 2em; text-align: center;"/>
+                                    <span class="input-group-text" style="height: 2em;">:</span>
+                                    <input min="0" max="9" value="{{ item.wynik2 }}" type="number" id="wynik2" name="wynik2" class="form-control"  style="height: 2em; text-align: center;"/>
+                                </div><p></p>
+                                <button class="btn btn-outline" style="color: white;background-color: #761b34;" type="submit" value="Submit" name="submit">Zapisz</button>
+                            </form>
+                        </td>
+                    {% endif %} 
+                    <td style="text-align: center;"><a href="{{ url_for('reprezentacja_page', id_r=item.id_reprezentacja2) }}" class="link-dark">{{ item.nazwa2 }}</a></td> 
+                    <td>{{ item.data_rozpoczecia }}</td>
+
+                </tr>
+        </tbody>
+    </table>
+
+        {% if current_user.is_authenticated %}
+            <form action="{{ url_for('mecz_admin_page', id_m=mecz_id, id_r1=item.id_reprezentacja1, w_r1 = item.wynik1, id_r2=item.id_reprezentacja2, w_r2 = item.wynik2) }}" method="POST" style="text-align: center;">            
+                <p></p>
+                {% if item.wynik1 + item.wynik2 > 0 %}
+                    <button class="btn btn-outline" style="color: #761b34; background-color: #edeee4; margin-top: 10%; position:absolute; margin-left: -3.76%;" type="submit" value="Submit1" name="submit1">Zapisz Strzelców</button>
+                {% endif %}
+                <p></p>
+                <table class="table table-hover" style="width: 26%; background-color: #edeee4; text-align: left; margin-left: 20%; margin-top: 13%; position:absolute;">
+                    <thead>
+                        <tr style="background-color: #edeee4;">
+                            <th scope="col" style="text-align: center;">Piłkarz</th>
+                            <th scope="col" style="text-align: right;">Gole</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in range(item.wynik1) %}
+                            {% for p in reprezentacja1 %}
+                            <tr>
+                                <td style="text-align: center;">{{ p.numer }}. {{ p.imie[0] }}. {{ p.nazwisko }}</td>
+                                <td style="text-align: right;">
+                                    <select name="gole1_{{ p.numer }}" id="gole">
+                                        <option value="0">0</option>
+                                        <option value="1">1</option>
+                                        <option value="2">2</option>
+                                        <option value="3">3</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+                <p></p>
+                <!-- {% if item.wynik2 > 0 %} -->
+                    <!-- <button class="btn btn-outline" style="color: #761b34; background-color: #edeee4; margin-top: 10%; position:absolute; margin-left: 16%;" type="submit" value="Submit2" name="submit2">Zapisz</button> -->
+                <!-- {% endif %}   -->
+                <p></p>
+                <table class="table table-hover" style="width: 26%; background-color: #edeee4; text-align: left; margin-left: 54%; margin-top: 13%; position:absolute">
+                    <thead>
+                        <tr style="background-color: #edeee4;">
+                            <th scope="col" style="text-align: center;">Piłkarz</th>
+                            <th scope="col" style="text-align: right;">Gole</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for i in range(item.wynik2) %}
+                            {% for p in reprezentacja2 %}
+                            <tr>
+                                <td style="text-align: center;">{{ p.numer }}. {{ p.imie[0] }}. {{ p.nazwisko }}</td>
+                                <td style="text-align: right;">
+                                    <select name="gole2_{{ p.numer }}" id="gole">
+                                            <option value="0">0</option>
+                                            <option value="1">1</option>
+                                            <option value="2">2</option>
+                                            <option value="3">3</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </form>
+            
+        {% endif %}
+    {% endfor %}
+{% endblock %}
+{% block actions %}
+{% endblock %}

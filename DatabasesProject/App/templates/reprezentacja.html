@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block style %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}" />
+{% endblock %}
+{% block title %}
+    {% for item in rep_nazwa1 %}
+        {{ item.rep_name }}
+    {% endfor %}
+{% endblock %}
+{% block content %}
+    <p></p>
+    <p class="text-uppercase fs-1 fw-bold" style="color:#edeee4; text-align: center; position: relative;">
+        {% for item in konfederacja %}
+            <a class="btn btn-outline text-uppercase fs-2 fw-bold" style="color: #c3c3be;background-color: transparent;" href="{{ url_for('konfederacja_page', kf=item.konfederacja) }}" role="button">{{ item.konfederacja }}</a>
+        {% endfor %} | 
+        {% for item in rep_nazwa %}
+            {{ item.rep_name }}
+        {% endfor %} | 
+        {% for item in grupa %}
+            <a class="btn btn-outline text-uppercase fs-2 fw-bold" style="color: #c3c3be;background-color: transparent;" href="{{ url_for('grupa_page', gr=item.grupa) }}" role="button">Grupa {{ item.grupa }}</a>
+        {% endfor %}
+    </p>
+    <p class="text-uppercase fs-4 fw-bold" style="color:#bcbdba; text-align: left; margin-left: 17%; margin-top: 2.2%; position: relative;">
+        
+    </p>
+    <img src="{{url_for('static', filename=id_png)}}" alt="flaga" style="width: 30%; position:absolute; margin-left: 15%; padding-top: 3em;">
+    <table class="table table-hover" style="background-color: #edeee4; width: 35%; margin-left: 50%;">
+        <thead>
+            <tr style="background-color: #edeee4;">
+                <th scope="col">ID meczu</th>
+                <th scope="col">Drużyna</th>
+                <th scope="col">Wynik</th>
+                <th scope="col">Drużyna</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in mecze %}
+                <tr>
+                    <td>{{ item.id_mecz }}</td>
+                    <td>{{ item.nazwa1 }}</td>
+                    <td>{{ item.wynik1 }} : {{ item.wynik2 }}</td>
+                    <td>{{ item.nazwa2 }}</td>
+                    <td style="text-align:right;">
+                        <a class="btn btn-outline" style="color: white;background-color: #761b34;" href="{{ url_for('mecz_page', id_m=item.id_mecz, id_r1=item.id_reprezentacja1, id_r2=item.id_reprezentacja2) }}" role="button">Więcej</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% for item in m_count %}
+        {% if item.count < 7 %}
+            {% for i in range((7-item.count)*2) %}
+                <br>
+            {% endfor %}
+        {% endif %}
+    {% endfor %}
+    <p></p>
+    <p class="text-uppercase fs-1 fw-bold" style="color:#edeee4; text-align: right; margin-right: 65%;">SELEKCJONER:</p>
+    <table class="table table-hover" style="background-color: #edeee4; width: 70%; margin-left: 15%;">
+        <thead>
+            <tr style="background-color: #edeee4;">
+                <th scope="col">Imie</th>
+                <th scope="col">Nazwisko</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in selekcjoner %}
+                <tr>
+                    <td>{{ item.imie }}</td>
+                    <td>{{ item.nazwisko }}</td>
+                    <td style="text-align:right;">
+                        <a class="btn btn-outline" style="color: white;background-color: #761b34;" href="{{ url_for('selekcjoner_page', id_s=item.id_reprezentacja) }}" role="button">Więcej</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    <p></p>
+    <p class="text-uppercase fs-1 fw-bold" style="color:#edeee4;  text-align: right; margin-right: 65%;">Piłkarze:</p>
+    <table class="table table-hover" style="background-color: #edeee4; width: 70%; margin-left: 15%;">
+        <thead>
+            <tr style="background-color: #edeee4;">
+                <th scope="col">Numer na koszulce</th>
+                <th scope="col">Imie</th>
+                <th scope="col">Nazwisko</th>
+                <!-- numer na koszulce do wiecej?? -->
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.numer }}</td>
+                    <td>{{ item.imie }}</td>
+                    <td>{{ item.nazwisko }}</td>
+                    <td style="text-align:right;">
+                        <a class="btn btn-outline" style="color: white;background-color: #761b34;" href="{{ url_for('pilkarz_page', id_p=item.id_pilkarz) }}" role="button">Więcej</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+{% block actions %}
+{% endblock %}

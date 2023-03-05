@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block style %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}" />
+{% endblock %}
+{% block title %}
+    Selekcjonerzy
+{% endblock %}
+{% block content %}
+    <p></p>
+    <table class="table table-hover" style="background-color: #edeee4;">
+        <thead>
+            <tr style="background-color: #edeee4;">
+                <th scope="col">Imie</th>
+                <th scope="col">Nazwisko</th>
+                <th scope="col">Reprezentacja</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.imie }}</td>
+                    <td>{{ item.nazwisko }}</td>
+                    <td style="text-align: center;"><a href="{{ url_for('reprezentacja_page', id_r=item.id_reprezentacja) }}" class="link-dark">{{ item.reprezentacja }}</a></td>
+                    <td>
+                        <a class="btn btn-outline" style="color: white;background-color: #761b34;" href="{{ url_for('selekcjoner_page', id_s=item.id_reprezentacja) }}" role="button">Więcej</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+{% block actions %}
+{% endblock %}

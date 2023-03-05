@@ -1,0 +1,11 @@
+img {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+    width: 66%;
+}
+
+th,
+    td {
+      width: 20%;
+    }

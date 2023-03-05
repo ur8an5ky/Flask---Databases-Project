@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block style %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}" />
+{% endblock %}
+{% block title %}
+    Reprezentacje
+{% endblock %}
+{% block content %}
+    <p></p>
+    <table class="table table-hover" style="background-color: #edeee4;">
+        <thead>
+            <tr style="background-color: #edeee4;">
+                <th scope="col" style="text-align: right;">Pilkarz</th>
+                <th scope="col" style="text-align: left;"></th>
+                <th scope="col">Reprezentacja</th>
+                <th scope="col">Liczba Goli</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+                <tr>
+                    <td style="text-align: right;">{{ item.imie }}</td>
+                    <td style="text-align: left;">{{ item.nazwisko }}</td>
+                    <td style="text-align: center;"><a href="{{ url_for('reprezentacja_page', id_r=item.id_reprezentacja) }}" class="link-dark">{{ item.reprezentacja }}</a></td>   
+                    <td>{{ item.suma_goli }}</td>
+                    <td>
+                        <a class="btn btn-outline" style="color: white;background-color: #761b34;" href="{{ url_for('pilkarz_page', id_p=item.id_pilkarz) }}" role="button">Więcej</a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+{% block actions %}
+{% endblock %}

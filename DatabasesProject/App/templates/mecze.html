@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+{% block style %}
+    <link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}" />
+{% endblock %}
+{% block title %}
+    Mecze
+{% endblock %}
+{% block content %}
+    <p></p>
+    <table class="table table-hover" style="background-color: #edeee4;">
+        <thead>
+            <tr style="background-color: #edeee4;">
+                <th scope="col">ID meczu</th>
+                <th scope="col">Drużyna</th>
+                <th scope="col">Wynik</th>
+                <th scope="col">Drużyna</th>
+                <!-- <th scope="col">Faza</th>   grupa!! -->
+                <!-- <th scope="col">id_sedzia</th>
+                <th scope="col">id_stadion</th>
+            OBA WYZEJ DO SEKCJI WIECEJ
+            -->
+                <th scope="col">Data rozpoczecia</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for item in items %}
+                <tr>
+                    <td>{{ item.id_mecz }}</td>
+                    <td>{{ item.nazwa1 }}</td>
+                    <td>{{ item.wynik1 }} : {{ item.wynik2 }}</td>
+                    <td>{{ item.nazwa2 }}</td>
+                    <td>{{ item.data_rozpoczecia }}</td>
+                    <td>
+                        <a class="btn btn-outline" style="color: white;background-color: #761b34;" href="{{ url_for('mecz_page', id_m=item.id_mecz, id_r1=item.id_reprezentacja1, id_r2=item.id_reprezentacja2) }}" role="button">Więcej</a>
+                    </td>
+                    {% if current_user.is_authenticated %}
+                    <td>
+                        <a class="btn btn-warning" style="color: #761b34;" href="{{ url_for('mecz_admin_page', id_m=item.id_mecz, id_r1=item.id_reprezentacja1, w_r1 = item.wynik1, id_r2=item.id_reprezentacja2, w_r2 = item.wynik2) }}" role="button">Edytuj</a>
+                    </td>
+                    {% endif %}
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+{% endblock %}
+{% block actions %}
+{% endblock %}
