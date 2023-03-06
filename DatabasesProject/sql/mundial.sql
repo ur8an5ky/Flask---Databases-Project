@@ -1,6 +1,6 @@
-CREATE SCHEMA mundial ;
---
-SET SEARCH_PATH TO mundial ;
+-- CREATE SCHEMA mundial ;
+-- --
+-- SET SEARCH_PATH TO mundial ;
 
 -- Tworzenie tabel --
 create table mecz (id_mecz int, id_stadion int, id_sedzia int, id_reprezentacja1 int, id_reprezentacja2 int, faza varchar(11), data_rozpoczecia timestamp) ;

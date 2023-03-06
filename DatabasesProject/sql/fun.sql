@@ -1,23 +1,23 @@
-SET SEARCH_PATH TO mundial ;
+-- SET SEARCH_PATH TO mundial ;
 
-create or replace function view_gr(grp varchar) returns setof reprezentacja as
-$$
-    select * from reprezentacja where grupa=grp order by nazwa;
-$$
-language sql;
+-- create or replace function view_gr(grp varchar) returns setof reprezentacja as
+-- $$
+--     select * from reprezentacja where grupa=grp order by nazwa;
+-- $$
+-- language sql;
 
-create or replace function rep_name(id_r int) returns varchar(16) as
-$$
-    declare
-        id_rep alias for $1;
-        name reprezentacja.nazwa%TYPE;
-    begin
-        select into name nazwa from reprezentacja
-        where id_reprezentacja = id_rep;
-        return name;
-    end;
-$$
-language 'plpgsql';
+-- create or replace function rep_name(id_r int) returns varchar(16) as
+-- $$
+--     declare
+--         id_rep alias for $1;
+--         name varchar;
+--     begin
+--         select into name nazwa from reprezentacja
+--         where id_reprezentacja = id_rep;
+--         return name;
+--     end;
+-- $$
+-- language 'plpgsql';
 
 create or replace view mecz_view (id_mecz, id_reprezentacja1, nazwa1, id_reprezentacja2, nazwa2) as 
     select mecz.id_mecz, mecz.id_reprezentacja1, r1.nazwa, mecz.id_reprezentacja2, r2.nazwa, mecz.data_rozpoczecia
@@ -77,7 +77,7 @@ create or replace view stadion_mecze_view (id_mecz, id_stadion, id_reprezentacja
     on w.id_mecz = st.id_mecz
     order by st.id_mecz;
 
-create or replace function remove_if_draw00 () returns trigger language plpgsql as
+create or replace function remove_if_draw00 () returns trigger language z as
 $$
     begin
         if NEW.wynik_reprezentacja1 = 0 and NEW.wynik_reprezentacja2 = 0 then
