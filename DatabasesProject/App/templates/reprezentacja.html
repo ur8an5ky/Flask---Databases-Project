@@ -3,9 +3,7 @@
     <link rel="stylesheet" href="{{url_for('static', filename='css/home.css')}}" />
 {% endblock %}
 {% block title %}
-    {% for item in rep_nazwa1 %}
-        {{ item.rep_name }}
-    {% endfor %}
+    {{ rep_nazwa1 }}
 {% endblock %}
 {% block content %}
     <p></p>
@@ -13,9 +11,7 @@
         {% for item in konfederacja %}
             <a class="btn btn-outline text-uppercase fs-2 fw-bold" style="color: #c3c3be;background-color: transparent;" href="{{ url_for('konfederacja_page', kf=item.konfederacja) }}" role="button">{{ item.konfederacja }}</a>
         {% endfor %} | 
-        {% for item in rep_nazwa %}
-            {{ item.rep_name }}
-        {% endfor %} | 
+        {{ rep_nazwa }} | 
         {% for item in grupa %}
             <a class="btn btn-outline text-uppercase fs-2 fw-bold" style="color: #c3c3be;background-color: transparent;" href="{{ url_for('grupa_page', gr=item.grupa) }}" role="button">Grupa {{ item.grupa }}</a>
         {% endfor %}

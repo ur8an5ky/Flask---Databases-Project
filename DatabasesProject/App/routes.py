@@ -8,20 +8,29 @@ from flask_login import login_user, logout_user, current_user
 @app.route('/home')
 def home_page():
     with engine.connect() as con:
-        grA = con.execute('SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'A\')')
-        grB = con.execute('SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'B\')')
-        grC = con.execute('SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'C\')')
-        grD = con.execute('SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'D\')')
-        grE = con.execute('SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'E\')')
-        grF = con.execute('SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'F\')')
-        grG = con.execute('SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'G\')')
-        grH = con.execute('SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'H\')')
+        # grA = con.execute('SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'A\')')
+        # grB = con.execute('SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'B\')')
+        # grC = con.execute('SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'C\')')
+        # grD = con.execute('SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'D\')')
+        # grE = con.execute('SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'E\')')
+        # grF = con.execute('SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'F\')')
+        # grG = con.execute('SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'G\')')
+        # grH = con.execute('SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'H\')')
+        grA = con.execute(f'SELECT nazwa, id_reprezentacja FROM mundial.reprezentacja WHERE grupa=\'A\' order by nazwa;')
+        grB = con.execute(f'SELECT nazwa, id_reprezentacja FROM mundial.reprezentacja WHERE grupa=\'B\' order by nazwa;')
+        grC = con.execute(f'SELECT nazwa, id_reprezentacja FROM mundial.reprezentacja WHERE grupa=\'C\' order by nazwa;')
+        grD = con.execute(f'SELECT nazwa, id_reprezentacja FROM mundial.reprezentacja WHERE grupa=\'D\' order by nazwa;')
+        grE = con.execute(f'SELECT nazwa, id_reprezentacja FROM mundial.reprezentacja WHERE grupa=\'E\' order by nazwa;')
+        grF = con.execute(f'SELECT nazwa, id_reprezentacja FROM mundial.reprezentacja WHERE grupa=\'F\' order by nazwa;')
+        grG = con.execute(f'SELECT nazwa, id_reprezentacja FROM mundial.reprezentacja WHERE grupa=\'G\' order by nazwa;')
+        grH = con.execute(f'SELECT nazwa, id_reprezentacja FROM mundial.reprezentacja WHERE grupa=\'H\' order by nazwa;')
     return render_template('home.html', a = grA, b = grB, c = grC, d = grD, e = grE, f = grF, g = grG, h = grH)
 
 @app.route('/grupa/<gr>', methods=['GET', 'POST'])
 def grupa_page(gr):
     with engine.connect() as con:
-        grupa = con.execute(f'SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'{gr}\');')
+        # grupa = con.execute(f'SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'{gr}\');')
+        grupa = con.execute(f'SELECT nazwa, id_reprezentacja FROM mundial.reprezentacja WHERE grupa=\'{gr}\' order by nazwa;')
         mecze = con.execute(f'SELECT * FROM mundial.grupa_mecze_view WHERE grupa = \'{gr}\';')
     return render_template('grupa.html', grupa = grupa, mecze = mecze)
 
@@ -101,8 +110,12 @@ def reprezentacje_page():
 def reprezentacja_page(id_r):
     with engine.connect() as con:
         reprezentacja = con.execute('SELECT * FROM mundial.pilkarz WHERE id_reprezentacja=' + str(id_r) + ';')
-        rep_nazwa = con.execute('SELECT mundial.rep_name(' + str(id_r) + ');')
-        rep_nazwa1 = con.execute('SELECT mundial.rep_name(' + str(id_r) + ');')
+        # rep_nazwa = con.execute('SELECT mundial.rep_name(' + str(id_r) + ');')
+        # rep_nazwa1 = con.execute('SELECT mundial.rep_name(' + str(id_r) + ');')
+        rep_nazwa = con.execute(f'SELECT nazwa from mundial.reprezentacja WHERE id_reprezentacja = {str(id_r)};')
+        rep_nazwa1 = con.execute(f'SELECT nazwa from mundial.reprezentacja WHERE id_reprezentacja = {str(id_r)};')
+        rep_nazwa = rep_nazwa.mappings().all()[0]['nazwa']
+        rep_nazwa1 = rep_nazwa1.mappings().all()[0]['nazwa']
         mecze_rep = con.execute('SELECT * FROM mundial.wynik_view WHERE id_reprezentacja1 = \'' + str(id_r) + '\' OR id_reprezentacja2 = \'' + str(id_r) + '\';')
         id_rep = id_r
         mecz_count = con.execute('SELECT COUNT(id_mecz) FROM mundial.mecz_view WHERE id_reprezentacja1 = \'' + str(id_r) + '\' OR id_reprezentacja2 = \'' + str(id_r) + '\';')
