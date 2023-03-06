@@ -9,13 +9,6 @@ from flask_login import login_user, logout_user, current_user
 def home_page():
     with engine.connect() as con:
         # grA = con.execute('SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'A\')')
-        # grB = con.execute('SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'B\')')
-        # grC = con.execute('SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'C\')')
-        # grD = con.execute('SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'D\')')
-        # grE = con.execute('SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'E\')')
-        # grF = con.execute('SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'F\')')
-        # grG = con.execute('SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'G\')')
-        # grH = con.execute('SELECT nazwa, id_reprezentacja FROM mundial.view_gr(\'H\')')
         grA = con.execute(f'SELECT nazwa, id_reprezentacja FROM mundial.reprezentacja WHERE grupa=\'A\' order by nazwa;')
         grB = con.execute(f'SELECT nazwa, id_reprezentacja FROM mundial.reprezentacja WHERE grupa=\'B\' order by nazwa;')
         grC = con.execute(f'SELECT nazwa, id_reprezentacja FROM mundial.reprezentacja WHERE grupa=\'C\' order by nazwa;')
@@ -111,7 +104,6 @@ def reprezentacja_page(id_r):
     with engine.connect() as con:
         reprezentacja = con.execute('SELECT * FROM mundial.pilkarz WHERE id_reprezentacja=' + str(id_r) + ';')
         # rep_nazwa = con.execute('SELECT mundial.rep_name(' + str(id_r) + ');')
-        # rep_nazwa1 = con.execute('SELECT mundial.rep_name(' + str(id_r) + ');')
         rep_nazwa = con.execute(f'SELECT nazwa from mundial.reprezentacja WHERE id_reprezentacja = {str(id_r)};')
         rep_nazwa1 = con.execute(f'SELECT nazwa from mundial.reprezentacja WHERE id_reprezentacja = {str(id_r)};')
         rep_nazwa = rep_nazwa.mappings().all()[0]['nazwa']
